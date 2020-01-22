@@ -1,29 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {createStore} from "redux";
-import reducers from "./reducers";
-
-const store = createStore(reducers);
+import {useSelector} from "react-redux";
 
 function App() {
+
+  const counter = useSelector(state => state.counterReducer);
+  const isLogged = useSelector(state => state.loggedReducer);
+
   return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    <div className="App">
+      <h1>Counter: {counter}</h1>
+      <button>+</button>
+      <button>-</button>
+      {isLogged ? <h3>Valuable information user shouldn't see if not logged in</h3> : ''}
+    </div>
   );
 }
 
